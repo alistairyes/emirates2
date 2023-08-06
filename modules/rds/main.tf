@@ -1,10 +1,12 @@
-resource "aws_db_subnet_group" "default" {
-  name       = var.subnet_group_name
-  subnet_ids = var.data_subnet_ids
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
 
-  tags = {
-    Name = var.subnet_group_name
-  }
+terraform {
+  required_version = ">= 0.12"
+}
+
+provider "aws" {
+  region = var.aws_region
 }
 
 resource "aws_db_instance" "default" {
@@ -19,10 +21,10 @@ resource "aws_db_instance" "default" {
   password               = var.password
   vpc_security_group_ids = [aws_security_group.default.id]
   db_subnet_group_name   = aws_db_subnet_group.default.id
-
-  tags = {
-    Name = var.identifier
-  }
 }
 
-# Additional configurations like RDS replicas, backups, etc. can be added here
+resource "aws_db_subnet_group" "default" {
+  name        = "main_subnet_group"
+  description = "Our main group of subnets"
+  subnet_ids  = [aws_subnet.subnet_1.id, aws_subnet.subnet_2.id]
+}
