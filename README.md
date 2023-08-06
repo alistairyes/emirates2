@@ -21,7 +21,7 @@
 
 ## Solution Overview
 
-This repository contains Terraform code to deploy a NorthStar demo. It showcases how AWS resources can be utilized to build an architecture that integrates with NorthStar, providing real-time data and insights.
+This repository contains Terraform code to deploy a NorthStar demo. It showcases how AWS resources can be utilized to build a 3 tier architecture that autoscales the Front and Back-end automatically by utilizing fargate.  The code pipeline allows you to update the docker App and deploys using Blue/Green for both front and Back End Clusters.
 
 ## General Information
 
